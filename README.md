@@ -1,7 +1,7 @@
 # fraud_detection
 Deployment project of a Machine Learning (ML) models to make strokes prediction
 1. API 
-1.a Unzip the directory p2_snicole 
+1.a Unzip the directory p2_snicole_2 
 You should now have a directory structure like:
 .
 ├── app
