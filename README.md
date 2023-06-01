@@ -1,5 +1,5 @@
 # fraud_detection
-Deployment project of a Machine Learning (ML) models to make strokes prediction
+Deployment project of a Machine Learning (ML) models to make detect fraud payments
 1. API 
 1.a Unzip the directory p2_snicole_2 
 You should now have a directory structure like:
