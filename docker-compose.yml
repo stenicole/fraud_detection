@@ -1,0 +1,54 @@
+version: '3.9'
+services:
+
+ fastapi:
+    image: fastapi_snicole:latest
+    command: uvicorn app.main:api --reload --host 0.0.0.0  --port 8000  
+    container_name: fastapi
+    volumes:
+      - ./app:/code/app
+    ports:
+      - "8000:8000"
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:8000/status"]
+        interval: 10s
+        timeout: 5s
+        retries: 5
+    
+
+ authentication:   
+    image: authent:latest
+    env_file:
+      - vars_env.env
+    container_name: authentication
+    volumes:
+      - api_test:/authent/data
+      - .:/authent
+    depends_on:
+      - fastapi    
+ 
+ authorization:   
+    image: authoriz:latest
+    env_file:
+      - vars_env.env
+    container_name: authorization
+    volumes:
+      - api_test:/authoriz/data
+      - .:/authoriz
+    depends_on:
+      - fastapi
+    
+ content:   
+    image: content:latest
+    env_file:
+      - vars_env.env
+    container_name: content
+    volumes:
+      - api_test:/content/data
+      - .:/content
+    depends_on:
+      - fastapi    
+        
+             
+volumes:  
+  api_test:
