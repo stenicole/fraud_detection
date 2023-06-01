@@ -1,0 +1,8 @@
+FROM ubuntu:latest
+RUN apt-get update && apt-get install python3-pip -y && pip3 install requests 
+RUN apt-get clean \ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp*
+WORKDIR /content/data/
+ADD content.py /content/content.py
+WORKDIR /content/
+CMD sleep 10; python3 content.py
+

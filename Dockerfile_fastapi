@@ -1,0 +1,17 @@
+FROM tiangolo/uvicorn-gunicorn:python3.8
+
+# 
+WORKDIR /code
+
+# 
+COPY ./requirements.txt /code/requirements.txt
+
+# 
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+RUN apt-get update && apt-get install python3-pip -y && pip install joblib && pip3 install requests
+RUN apt-get clean \ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp*
+# 
+COPY ./app /code/app
+
+# 
+CMD ["uvicorn", "app.main:api --reload", "--host", "0.0.0.0", "--port", "8000"]
